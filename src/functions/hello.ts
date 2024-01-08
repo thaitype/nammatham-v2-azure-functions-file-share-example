@@ -1,5 +1,7 @@
 import { func } from '../nammatham';
 import fs from 'fs/promises';
+import path from 'path';
+import { testSqlite } from '../sqlite';
 
 const mountPath = process.env.STORAGE_FILE_SHARE_MOUNT_PATH ?? '';
 
@@ -11,12 +13,15 @@ const stringifyError = (err: unknown) => {
 
 export default func.httpGet('hello').handler(async ({ trigger, context }) => {
   try {
-    // Write a file to the mounted share
-    await fs.writeFile(`${mountPath}/hello.txt`, 'Hello World!', 'utf-8');
-    // List files in the mounted share
-    const files = await fs.readdir(mountPath);
+    // // Write a file to the mounted share
+    // await fs.writeFile(`${mountPath}/hello.txt`, 'Hello World!', 'utf-8');
+    // // List files in the mounted share
+    // const files = await fs.readdir(mountPath);
+
+    const users = await testSqlite(path.join(mountPath, 'sqlite.db'));
+
     return {
-      jsonBody: { files },
+      jsonBody: { users },
     };
   } catch (err) {
     return {
