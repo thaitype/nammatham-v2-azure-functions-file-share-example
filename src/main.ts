@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { expressPlugin } from '@nammatham/express';
 import { app } from './nammatham';
 import hello from './functions/hello';
