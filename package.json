@@ -14,13 +14,16 @@
   "author": "Thada Wangthammang",
   "license": "MIT",
   "dependencies": {
+    "@azure/data-tables": "^13.2.2",
     "@azure/functions": "^4.1.0",
+    "@faker-js/faker": "^8.3.1",
     "@nammatham/azure-functions": "2.0.0-alpha.8",
     "@nammatham/core": "2.0.0-alpha.8",
     "@nammatham/express": "2.0.0-alpha.8",
     "@types/better-sqlite3": "^7.6.8",
-    "better-sqlite3": "^9.2.2",
-    "dotenv": "^16.3.1"
+    "dayjs": "^1.11.10",
+    "dotenv": "^16.3.1",
+    "nodejs-polars": "^0.8.3"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",

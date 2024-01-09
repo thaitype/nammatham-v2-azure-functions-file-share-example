@@ -1,9 +1,6 @@
+import { addTransaction } from '../add-transaction';
 import { func } from '../nammatham';
-import fs from 'fs/promises';
-import path from 'path';
-import { testSqlite } from '../sqlite';
-
-const mountPath = process.env.STORAGE_FILE_SHARE_MOUNT_PATH ?? '';
+import { queryData } from '../query-data';
 
 const stringifyError = (err: unknown) => {
   if (err instanceof Error) return err.message;
@@ -18,10 +15,14 @@ export default func.httpGet('hello').handler(async ({ trigger, context }) => {
     // // List files in the mounted share
     // const files = await fs.readdir(mountPath);
 
-    const users = await testSqlite(path.join(mountPath, 'sqlite.db'));
+    // const users = await testSqlite(path.join(mountPath, 'sqlite-v2.db'));
+
+    await addTransaction();
+
+    const data = await queryData();
 
     return {
-      jsonBody: { users },
+      jsonBody: { data },
     };
   } catch (err) {
     return {
